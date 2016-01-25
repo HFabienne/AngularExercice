@@ -1,0 +1,74 @@
+<!doctype html>
+<html ng-app="appAdneomExo">
+  <head>
+    <link rel="stylesheet" type="text/css" href="index.css">   
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.min.js"></script>
+    <script src="controller.js"></script>
+    <title>Page de News</title>
+  </head>
+  <body ng-controller="controller">
+    <div>
+      <!--
+      <div ng-init="listePost = [
+        {id:1, titre:'Post1', lien:'Lien1.html', nombreVotes:0, commentaires:'tabComment1'}, 
+		{id:2, titre:'Post2', lien:'Lien2.html', nombreVotes:2, commentaires:'tabComment2'}]"
+		>-->
+        
+      <div id="post" ng-init="listerPost2()">
+        <div>
+            <table class="table table-hover">
+                <thead>
+                    <tr class="info">
+                        <th>#</th>
+                        <th>Titre</th>
+                        <th>Lien</th>
+                        <th>Votes</th>
+                        <th>Commentaires</th>
+                    </tr>
+                    
+                </thead>
+                <tbody>
+                    <tr ng-repeat="post in tableauMethode2" ng-show="verifPost(post)">
+                        <td>{{post.id}}</td>
+                        <td>{{post.title}}</td>
+                        <td>{{post.link}}</td>
+                        <td>{{post.upvotePost}} <button type="button" class="btnVote" ng-click="voterPost(post)">Voter!</button></td> 
+                        <td><button type="button" class="btnComment" ng-click="rendreVisibleComment()">Commenter!</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      </div>
+      
+      <br>
+      <br>
+      
+      <button type="button" ng-click="rendreVisiblePost()">Ajouter un Post</button>
+      <hr>
+      <div id="newPost" ng-show="visiblePost">
+          <h3>Poster une news</h3>
+          <label for="titrePost">Titre : </label>
+          <input type="text" ng-model="contenuPostTitre" id="titrePost"/>
+          <br>
+          <label for="lienPost">Lien : </label>
+          <br>
+          <input type="text" id="lienPost" ng-model="contenuPostLien"/>
+          <button type="button" ng-click="ajouterPost(contenuPostTitre,contenuPostLien)">Valider</button>
+      </div> 
+      
+        <div ng-show="visibleComment">
+          <hr>
+          <h3>Commenter</h3>
+          <label for="auteurCommentaire">Auteur : </label>
+          <input type="text" ng-model="auteurComment" id="auteurCommentaire"/>
+          <br>
+          <label for="contenuCommentaire">Commentaire : </label>
+          <br>
+          <textarea id="contenuCommentaire" type="text" rows=3 cols=48 ng-model="contenuComment"></textarea>
+          <button type="button" ng-click="ajouterComment(auteurComment,contenuComment,tmpPost)">Valider</button>
+        </div>
+     
+    </div>
+  </body>
+</html>
